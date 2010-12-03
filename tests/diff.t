@@ -114,3 +114,32 @@ diff --staged
   -c1
   +c3
 
+errors
+
+  $ $gh diff --rev abc --change abc
+  abort: --rev, --change, --index and --staged are mutually exclusive
+  [1]
+  $ $gh diff --rev abc --index
+  abort: --rev, --change, --index and --staged are mutually exclusive
+  [1]
+  $ $gh diff --rev abc --staged
+  abort: --rev, --change, --index and --staged are mutually exclusive
+  [1]
+  $ $gh diff --change abc --index
+  abort: --rev, --change, --index and --staged are mutually exclusive
+  [1]
+  $ $gh diff --change abc --staged
+  abort: --rev, --change, --index and --staged are mutually exclusive
+  [1]
+  $ $gh diff --index --staged
+  abort: --rev, --change, --index and --staged are mutually exclusive
+  [1]
+  $ $gh diff --rev abc --change abc --index
+  abort: --rev, --change, --index and --staged are mutually exclusive
+  [1]
+  $ $gh diff --rev abc --change abc --staged
+  abort: --rev, --change, --index and --staged are mutually exclusive
+  [1]
+  $ $gh diff --rev abc --change abc --index --staged
+  abort: --rev, --change, --index and --staged are mutually exclusive
+  [1]

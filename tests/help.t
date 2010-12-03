@@ -11,6 +11,7 @@ summary
   Available commands:
   
    add       mark untracked files to be committed
+   branch    create a branch
    branches  list all branches
    diff      show diffs
    glog      graph changesets
@@ -24,6 +25,7 @@ summary
   Available commands:
   
    add       mark untracked files to be committed
+   branch    create a branch
    branches  list all branches
    diff      show diffs
    glog      graph changesets
@@ -37,6 +39,7 @@ summary
   Available commands:
   
    add       mark untracked files to be committed
+   branch    create a branch
    branches  list all branches
    diff      show diffs
    glog      graph changesets

@@ -83,6 +83,15 @@ def diff(rev='', change='', index=False, staged=False):
 @baker.command(
         params={},
         shortopts={})
+def branch(name):
+    '''create a branch'''
+    cmd = ['checkout', '-b', name]
+
+    sys.exit(git(*cmd))
+
+@baker.command(
+        params={},
+        shortopts={})
 def branches():
     '''list all branches'''
     cmd = ['branch', '-a']

@@ -17,37 +17,18 @@ create a git repo
   $ git add .
   $ git commit -qm '1'
 
-one branch
+branch
 
-  $ $gh branches
+  $ git branch
   * master
-
-multiple branches
-
-  $ git checkout -b b1
+  $ $gh branch b1
   Switched to a new branch 'b1'
-  $ $gh branches
+  $ git branch
   * b1
     master
 
-remote branches
+errors
 
-  $ cd ..
-  $ git clone -q test test2
-  $ cd test2
-  $ $gh branches
-  * master
-    remotes/origin/HEAD -> origin/master
-    remotes/origin/b1
-    remotes/origin/master
-
-remote branches and multiple local branches
-
-  $ git checkout -b b2
-  Switched to a new branch 'b2'
-  $ $gh branches
-  * b2
-    master
-    remotes/origin/HEAD -> origin/master
-    remotes/origin/b1
-    remotes/origin/master
+  $ $gh branch
+  Required argument 'name' not given
+  [1]
