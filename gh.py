@@ -19,6 +19,20 @@ def git(*args):
 
     return subprocess.call(cmd, shell=False)
 
+def _git_status():
+    lines = subprocess.check_output(['git', 'status', '-s']).splitlines()
+
+    status = []
+    for line in lines:
+        if line[0] == ' ':
+            line = '_' + line[1:]
+        if line[1] == ' ':
+            line = line[0] + '_' + line[2:]
+        s, _, path = line.strip().partition(' ')
+        status.append([s, path.strip()])
+
+    return status
+
 def abort(msg):
     sys.stderr.write('abort: %s\n' % msg)
     sys.exit(1)
@@ -111,20 +125,62 @@ def add():
 
 
 @baker.command(
-        params={},
+        params={'all': 'restore all files if no files are given'},
         shortopts={})
-def revert(*args):
+def revert(*args, **kwargs):
     '''restore files to an earlier state
-    
+
     Specifying directories is NOT supported yet!
     '''
-    cmd = ['checkout', 'HEAD', '--']
-    cmd.extend(args)
+    _all = kwargs.get('all')
 
-    for path in args:
-        shutil.copyfile(path, path + '.orig')
 
-    sys.exit(git(*cmd))
+    if not _all and not args:
+        abort('specify files to revert or use --all to revert all files')
+
+    if (_all and args) or (_all and _all != True):
+        abort('cannot use --all when specifying files')
+
+    status = _git_status()
+
+    def _status_changed(s):
+        return any(c in s for c in 'MA')
+
+    if _all:
+        args = [(s, path) for s, path in status if _status_changed(s)]
+    else:
+        absargs = [os.path.abspath(arg) for arg in args]
+
+        args = [(s, path) for s, path in status
+                if _status_changed(s) and os.path.abspath(path) in absargs]
+
+    adds = [(s[0], s[1], path) for s, path in args if 'A' in s]
+    mods = [(s[0], s[1], path) for s, path in args
+            if 'M' in s
+            and not path in [add[2] for add in adds]]
+
+    if adds:
+        cmd = ['reset', '-q', 'HEAD', '--'] + [path for index, wdir, path in adds]
+        git(*cmd)
+
+    if mods:
+        for _, _, path in mods:
+            shutil.copyfile(path, path + '.orig')
+
+        # If there are staged changes that we revert they'll turn into wdir
+        # changes, which we then need to revert as well.
+        indexmods = [path for index, wdir, path in mods if index == 'M']
+        wdirmods = [path for index, wdir, path in mods]
+
+        if indexmods:
+            cmd = ['reset', '-q', 'HEAD', '--'] + indexmods
+            git(*cmd)
+
+        if wdirmods:
+            cmd = ['checkout', '-q', '--'] + wdirmods
+            git(*cmd)
+
+    sys.exit(0)
 
 
 if __name__ == '__main__':

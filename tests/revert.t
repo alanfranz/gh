@@ -81,3 +81,91 @@ reverting files in a different directory
   junk
   $ rm f3.orig
 
+  $ cd ..
+
+reverting adds
+
+  $ echo c4 > f4
+  $ git status -s
+  ?? f4
+
+  $ git add f4
+  $ git status -s
+  A  f4
+
+  $ $gh revert --all
+  $ git status -s
+  ?? f4
+  $ cat f4
+  c4
+
+  $ git add f4
+  $ git status -s
+  A  f4
+
+  $ echo c5 > f4
+  $ git status -s
+  AM f4
+
+  $ $gh revert f4
+  $ git status -s
+  ?? f4
+  $ cat f4
+  c5
+
+reverting adds and modifications at the same time. sample status:
+
+- MM f1
+-  M f2
+- AM f4
+- A  f5
+
+
+  $ git add f4
+  $ echo crevert > f4
+
+  $ echo crevert > f5
+  $ git add f5
+
+  $ echo crevert > f1
+  $ git add f1
+  $ echo crevert > f1
+
+  $ echo crevert > f2
+
+  $ git status -s
+  M  f1
+   M f2
+  AM f4
+  A  f5
+
+  $ $gh revert --all
+  $ cat f1
+  c2
+  $ cat f1.orig
+  crevert
+  $ cat f2
+  c2
+  $ cat f2.orig
+  crevert
+  $ cat f4
+  crevert
+  $ cat f5
+  crevert
+  $ ls
+  d
+  f1
+  f1.orig
+  f2
+  f2.orig
+  f4
+  f5
+
+errors
+
+  $ $gh revert
+  abort: specify files to revert or use --all to revert all files
+  [1]
+  $ $gh revert --all f1
+  abort: cannot use --all when specifying files
+  [1]
