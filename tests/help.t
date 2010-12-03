@@ -16,6 +16,7 @@ summary
    diff      show diffs
    glog      graph changesets
    log       list changesets
+   revert    restore files to an earlier state
   
   Use "/Users/sjl/src/gh/tests/../gh.py <command> --help" for individual command help.
   $ $gh help
@@ -30,6 +31,7 @@ summary
    diff      show diffs
    glog      graph changesets
    log       list changesets
+   revert    restore files to an earlier state
   
   Use "/Users/sjl/src/gh/tests/../gh.py <command> --help" for individual command help.
   $ $gh --help
@@ -44,6 +46,7 @@ summary
    diff      show diffs
    glog      graph changesets
    log       list changesets
+   revert    restore files to an earlier state
   
   Use "/Users/sjl/src/gh/tests/../gh.py <command> --help" for individual command help.
 

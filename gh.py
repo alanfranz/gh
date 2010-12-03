@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import os, sys
+import os, shutil, sys
 
 BASE_DIR = os.path.split(os.path.abspath(__file__))[0]
 BAKER_PATH = os.path.join(BASE_DIR, 'bundled', 'baker')
@@ -89,6 +89,7 @@ def branch(name):
 
     sys.exit(git(*cmd))
 
+
 @baker.command(
         params={},
         shortopts={})
@@ -108,6 +109,22 @@ def add():
 
     sys.exit(git(*cmd))
 
+
+@baker.command(
+        params={},
+        shortopts={})
+def revert(*args):
+    '''restore files to an earlier state
+    
+    Specifying directories is NOT supported yet!
+    '''
+    cmd = ['checkout', 'HEAD', '--']
+    cmd.extend(args)
+
+    for path in args:
+        shutil.copyfile(path, path + '.orig')
+
+    sys.exit(git(*cmd))
 
 
 if __name__ == '__main__':
