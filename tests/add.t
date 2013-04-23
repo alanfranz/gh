@@ -1,6 +1,5 @@
 setup
-
-  $ gh="$TESTDIR/../gh.py"
+  $ gh="$TESTDIR/../gh/gh.py"
   $ GIT_AUTHOR_NAME='test'; export GIT_AUTHOR_NAME
   $ GIT_AUTHOR_EMAIL='test@example.org'; export GIT_AUTHOR_EMAIL
   $ GIT_AUTHOR_DATE="2007-01-01 00:00:00 +0000"; export GIT_AUTHOR_DATE

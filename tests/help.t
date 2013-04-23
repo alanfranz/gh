@@ -1,12 +1,12 @@
 setup
 
-  $ gh="$TESTDIR/../gh.py"
+  $ gh="$TESTDIR/../gh/gh.py"
 
 summary
 
   $ $gh
   
-  Usage: /Users/sjl/src/gh/tests/../gh.py COMMAND <options>
+  Usage: *gh* COMMAND <options> (glob)
   
   Available commands:
   
@@ -18,10 +18,10 @@ summary
    log       list changesets
    revert    restore files to an earlier state
   
-  Use "/Users/sjl/src/gh/tests/../gh.py <command> --help" for individual command help.
+  Use "*gh* <command> --help" for individual command help. (glob)
   $ $gh help
   
-  Usage: /Users/sjl/src/gh/tests/../gh.py COMMAND <options>
+  Usage: *gh* COMMAND <options> (glob)
   
   Available commands:
   
@@ -33,10 +33,10 @@ summary
    log       list changesets
    revert    restore files to an earlier state
   
-  Use "/Users/sjl/src/gh/tests/../gh.py <command> --help" for individual command help.
+  Use "*gh* <command> --help" for individual command help. (glob)
   $ $gh --help
   
-  Usage: /Users/sjl/src/gh/tests/../gh.py COMMAND <options>
+  Usage: *gh* COMMAND <options> (glob)
   
   Available commands:
   
@@ -48,19 +48,19 @@ summary
    log       list changesets
    revert    restore files to an earlier state
   
-  Use "/Users/sjl/src/gh/tests/../gh.py <command> --help" for individual command help.
+  Use "*gh* <command> --help" for individual command help. (glob)
 
 branches
 
   $ $gh help branches
   
-  Usage: /Users/sjl/src/gh/tests/../gh.py branches
+  Usage: *gh* branches (glob)
   
   list all branches
   
   $ $gh branches --help
   
-  Usage: /Users/sjl/src/gh/tests/../gh.py branches
+  Usage: *gh* branches (glob)
   
   list all branches
   
@@ -69,7 +69,7 @@ log
 
   $ $gh help log
   
-  Usage: /Users/sjl/src/gh/tests/../gh.py log
+  Usage: *gh* log (glob)
   
   list changesets
   
@@ -82,7 +82,7 @@ diff
 
   $ $gh help diff
   
-  Usage: /Users/sjl/src/gh/tests/../gh.py diff
+  Usage: *gh* diff (glob)
   
   show diffs
   
@@ -98,7 +98,7 @@ add
 
   $ $gh help add
   
-  Usage: /Users/sjl/src/gh/tests/../gh.py add
+  Usage: *gh* add (glob)
   
   mark untracked files to be committed
   
@@ -107,7 +107,7 @@ glog
 
   $ $gh help glog
   
-  Usage: /Users/sjl/src/gh/tests/../gh.py glog
+  Usage: *gh* glog (glob)
   
   graph changesets
   

@@ -2,10 +2,6 @@
 
 import os, shutil, sys
 
-BASE_DIR = os.path.split(os.path.abspath(__file__))[0]
-BAKER_PATH = os.path.join(BASE_DIR, 'bundled', 'baker')
-sys.path.insert(0, BAKER_PATH)
-
 import baker
 import subprocess
 
@@ -183,5 +179,8 @@ def revert(*args, **kwargs):
     sys.exit(0)
 
 
-if __name__ == '__main__':
+def main():
     baker.run()
+
+if __name__ == '__main__':
+    main()
