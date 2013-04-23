@@ -8,10 +8,6 @@ setup(
         "Baker==1.1", 
         ],
 
-    tests_require=[
-        "cram"
-        ],
-
     entry_points = {
         "console_scripts":["gh=gh.gh:main"]
         },
